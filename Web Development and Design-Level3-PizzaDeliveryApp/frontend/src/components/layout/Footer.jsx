@@ -5,6 +5,7 @@ const Footer = () => {
 
         <h2 className="text-xl font-semibold">
           🍕 PizzaVerse
+          The future of food...
         </h2>
 
         <p className="text-gray-400 mt-2">

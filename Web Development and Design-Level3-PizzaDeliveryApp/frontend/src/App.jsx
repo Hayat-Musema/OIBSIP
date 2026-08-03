@@ -9,6 +9,8 @@ import Menu from "./pages/Menu";
 import Cart from "./pages/Cart";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
+import About from "./pages/About";
+import { Contact } from "lucide-react";
 
 function App(){
   return(
@@ -17,6 +19,8 @@ function App(){
     <Routes>
         <Route path="/" element={<Home />} />
                 <Route path="/menu" element={<Menu />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/contact" element={<Contact/>} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/login" element={<Login />} />
