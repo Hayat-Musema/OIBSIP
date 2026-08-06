@@ -2,22 +2,24 @@ const Button = ({
   children,
   variant = "primary",
   className = "",
+  type = "button",
   ...props
 }) => {
   const styles = {
     primary:
-      "bg-red-700 text-white hover:bg-red-800",
+      "bg-[#e2361d] text-white shadow-[0_16px_34px_rgba(226,54,29,0.28)] hover:-translate-y-0.5 hover:bg-[#c92e18]",
 
     secondary:
-      "border border-gray-300 bg-white text-gray-900 hover:bg-gray-100",
+      "border border-[#eadfd4] bg-white text-[#201510] hover:-translate-y-0.5 hover:border-[#e2361d] hover:text-[#e2361d]",
 
     outline:
-      "border border-red-700 text-red-700 hover:bg-red-700 hover:text-white",
+      "border border-[#e2361d] text-[#e2361d] hover:-translate-y-0.5 hover:bg-[#e2361d] hover:text-white",
   };
 
   return (
     <button
-      className={`px-6 py-3 rounded-lg font-medium transition duration-300 ${styles[variant]} ${className}`}
+      type={type}
+      className={`inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold tracking-wide transition duration-300 focus:outline-none focus:ring-4 focus:ring-[#e2361d]/20 ${styles[variant]} ${className}`}
       {...props}
     >
       {children}

@@ -2,10 +2,10 @@ import { Star } from "lucide-react";
 
 const RatingBadge = ({ rating }) => {
   return (
-    <div className="flex items-center gap-1 bg-white px-2 py-1 rounded-full shadow text-sm font-medium">
+    <div className="inline-flex items-center gap-1 rounded-full bg-white/95 px-3 py-1.5 text-sm font-black text-[#201510] shadow-[0_12px_28px_rgba(32,21,16,0.12)] backdrop-blur">
       <Star
         size={14}
-        className="fill-yellow-400 text-yellow-400"
+        className="fill-[#f7b731] text-[#f7b731]"
       />
 
       {rating}

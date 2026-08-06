@@ -1,35 +1,23 @@
-const stats = [
-  {
-    value: "20 min",
-    label: "Average Delivery",
-  },
-  {
-    value: "50K+",
-    label: "Happy Customers",
-  },
-  {
-    value: "4.9/5",
-    label: "APP Rating",
-  },
-];
+import { stats } from "../../data/homeData";
 
 const Stats = () => {
   return (
-    <section className="bg-[#F7F4EF] text-white py-16">
-      <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-10 text-center">
-
+    <section className="bg-[#201510] py-16 text-white">
+      <div className="mx-auto grid max-w-6xl gap-8 px-6 text-center md:grid-cols-3">
         {stats.map((item) => (
-          <div key={item.label}>
-            <h2 className="text-5xl font-bold">
+          <div
+            key={item.label}
+            className="rounded-[2rem] border border-white/10 bg-white/[0.04] px-6 py-8"
+          >
+            <h2 className="text-4xl font-black tracking-tight sm:text-5xl">
               {item.value}
             </h2>
 
-            <p className="mt-2 text-red-100">
+            <p className="mt-3 text-xs font-black uppercase tracking-[0.22em] text-[#f5b9a1]">
               {item.label}
             </p>
           </div>
         ))}
-
       </div>
     </section>
   );
