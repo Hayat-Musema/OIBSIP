@@ -7,6 +7,7 @@ import { z } from "zod";
 import Button from "../components/common/Button";
 import Input from "../components/common/Input";
 import Loader from "../components/common/Loader";
+import useAuth from "../hooks/useAuth";
 
 const registerSchema = z
   .object({
@@ -22,6 +23,7 @@ const registerSchema = z
   });
 
 const Register = () => {
+  const { register: registerUser } = useAuth();
   const [submitted, setSubmitted] = useState(false);
   const {
     register,
@@ -38,11 +40,25 @@ const Register = () => {
     },
   });
 
-  const onSubmit = async () => {
-    setSubmitted(false);
-    await new Promise((resolve) => setTimeout(resolve, 500));
+  const onSubmit = async (data) => {
+  setSubmitted(false);
+
+  try {
+    await registerUser({
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      password: data.password,
+    });
+
     setSubmitted(true);
-  };
+  } catch (error) {
+    console.error(
+      "Registration failed:",
+      error.response?.data?.message || error.message
+    );
+  }
+};
 
   return (
     <div className="bg-[#fff8f3]">

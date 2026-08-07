@@ -7,6 +7,7 @@ import { z } from "zod";
 import Button from "../components/common/Button";
 import Input from "../components/common/Input";
 import Loader from "../components/common/Loader";
+import useAuth from "../hooks/useAuth";
 
 const loginSchema = z.object({
   email: z.string().trim().email("Enter a valid email address."),
@@ -14,6 +15,7 @@ const loginSchema = z.object({
 });
 
 const Login = () => {
+  const { login } = useAuth();
   const [submitted, setSubmitted] = useState(false);
   const {
     register,
@@ -27,11 +29,23 @@ const Login = () => {
     },
   });
 
-  const onSubmit = async () => {
-    setSubmitted(false);
-    await new Promise((resolve) => setTimeout(resolve, 500));
+ const onSubmit = async (data) => {
+  setSubmitted(false);
+
+  try {
+    await login({
+      email: data.email,
+      password: data.password,
+    });
+
     setSubmitted(true);
-  };
+  } catch (error) {
+    console.error(
+      "Login failed:",
+      error.response?.data?.message || error.message
+    );
+  }
+};
 
   return (
     <div className="bg-[#fff8f3]">
