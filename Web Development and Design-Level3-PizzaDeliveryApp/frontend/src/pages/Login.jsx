@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Lock, Mail } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import Button from "../components/common/Button";
 import Input from "../components/common/Input";
@@ -16,7 +16,9 @@ const loginSchema = z.object({
 
 const Login = () => {
   const { login } = useAuth();
+  const navigate = useNavigate();
   const [submitted, setSubmitted] = useState(false);
+   const [errorMessage, setErrorMessage] = useState("");
   const {
     register,
     handleSubmit,
@@ -31,6 +33,7 @@ const Login = () => {
 
  const onSubmit = async (data) => {
   setSubmitted(false);
+  setErrorMessage("");
 
   try {
     await login({
@@ -38,11 +41,11 @@ const Login = () => {
       password: data.password,
     });
 
-    setSubmitted(true);
+   navigate("/");
   } catch (error) {
-    console.error(
-      "Login failed:",
-      error.response?.data?.message || error.message
+    setErrorMessage(
+      error.response?.data?.message || "Login failed, pls try again."
+    
     );
   }
 };
@@ -114,6 +117,12 @@ const Login = () => {
                 Forgot password?
               </a>
             </div>
+
+{errorMessage && (
+  <p className="rounded-2xl bg-red-50 px-4 py-3 text-sm font-bold text-red-600">
+    {errorMessage}
+  </p>
+)}
 
             <Button type="submit" className="min-h-14 w-full">
               {isSubmitting ? <Loader label="Signing in" /> : "Sign In"}
